@@ -21,6 +21,10 @@
 Основной страницей являеться *name*_html/index.html
 
 
+# Пример:
+
+Пример доступен по ссылке [alt90.github.io](https://alt90.github.io/)
+
 # Project Goals
 
 The code is written for educational purposes. Training course for web-developers - [DEVMAN.org](https://devman.org)
