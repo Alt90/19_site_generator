@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <title>Cодержание</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+  </head>
+
+  <body>
+
+    <div class="container">
+      <div class="row">
+        {% for topic in topics %}
+        <div class="col-xs-3">
+          <h2>{{topic}}</h2>
+          {% for page in pages[topic] %}
+          <p><a href="{{page['source']}}"><b>{{page['title']}}</b></a></p>
+          {% endfor %}
+        </div>
+        {% endfor %}
+      </div>
+    </div> <!-- /container -->
+  </body>
+</html>
