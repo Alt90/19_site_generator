@@ -4,6 +4,7 @@ import os
 import markdown
 
 from jinja2 import Environment, FileSystemLoader
+from collections import defaultdict
 
 
 def get_args():
@@ -17,9 +18,14 @@ def get_args():
     return parser.parse_args()
 
 
+def delete_special_simbol(file_name):
+    return file_name.replace(';', '').replace('&', '').replace(' ', '_')
+
+
 def get_source_html_path(source_path):
-    name_source_file = os.path.split(source_path)[-1]
-    source_html_path = name_source_file[:-2] + 'html'
+    name_source_file = os.path.split(source_path)[-1].replace(';', '')
+    name_source = '.'.join(name_source_file.split('.')[:-1])
+    source_html_path = '.'.join([delete_special_simbol(name_source), 'html'])
     return source_html_path
 
 
@@ -32,7 +38,7 @@ def revert_topics_list_to_dict(topics_list):
 
 
 def get_site_structure(pages_list, topics):
-    site_structure = {}
+    site_structure = defaultdict()
     for page in pages_list:
         site_structure_list = site_structure.get(topics[page['topic']], [])
         site_structure_list.append(get_page_html_info(page))
@@ -57,8 +63,8 @@ def create_index_html_file(site_directory, pages_list, topics_list):
 
 
 def get_page_content(page_source_path):
-    markdown_file = open(page_source_path, 'r')
-    return markdown.markdown(markdown_file.read())
+    with open(page_source_path, "r") as markdown_file:
+        return markdown.markdown(markdown_file.read())
 
 
 def get_page_html(page_source_path):
