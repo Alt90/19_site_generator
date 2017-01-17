@@ -33,8 +33,9 @@ def get_page_html_info(page):
     return {'title': page['title'],
             'source': get_source_html_path(page['source'])}
 
+
 def revert_topics_list_to_dict(topics_list):
-    return {topic['slug']:topic['title'] for topic in topics_list}
+    return {topic['slug']: topic['title'] for topic in topics_list}
 
 
 def get_site_structure(pages_list, topics):
