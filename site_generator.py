@@ -31,10 +31,8 @@ def screening_string_data(string_data):
 
 
 def get_source_html_path(source_path):
-    name_source_file = os.path.split(source_path)[-1].replace(';', '')
-    name_source = '.'.join(name_source_file.split('.')[:-1])
-    source_html_path = '.'.join([delete_special_simbol(name_source), 'html'])
-    return source_html_path
+    name_source_file = os.path.split(os.path.splitext(source_path)[0])[-1]
+    return '{}.html'.format(delete_special_simbol(name_source_file))
 
 
 def get_page_html_info(page):
