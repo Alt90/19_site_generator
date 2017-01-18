@@ -23,7 +23,7 @@
 
 # Пример:
 
-Пример доступен по ссылке [alt90.github.io](https://alt90.github.io/)
+Пример доступен по ссылке [alt90.github.io](https://alt90.github.io/19_site_generator/)
 
 # Project Goals
 
