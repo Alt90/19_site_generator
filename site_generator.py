@@ -45,11 +45,9 @@ def revert_topics_list_to_dict(topics_list):
 
 
 def get_site_structure(pages_list, topics):
-    site_structure = defaultdict()
+    site_structure = defaultdict(list)
     for page in pages_list:
-        site_structure_list = site_structure.get(topics[page['topic']], [])
-        site_structure_list.append(get_page_html_info(page))
-        site_structure[topics[page['topic']]] = site_structure_list
+        site_structure[topics[page['topic']]].append(get_page_html_info(page))
     return site_structure
 
 
