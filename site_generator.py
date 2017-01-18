@@ -22,6 +22,14 @@ def delete_special_simbol(file_name):
     return file_name.replace(';', '').replace('&', '').replace(' ', '_')
 
 
+def screening_string_data(string_data):
+    screening_data = str(string_data).replace('&', '&amp;')
+    screening_data = screening_data.replace('<', '&lt;').replace('>', '&gt;')
+    screening_data = screening_data.replace('"', '&quot;')
+    screening_data = screening_data.replace("'", '&#39;')
+    return screening_data
+
+
 def get_source_html_path(source_path):
     name_source_file = os.path.split(source_path)[-1].replace(';', '')
     name_source = '.'.join(name_source_file.split('.')[:-1])
@@ -30,7 +38,7 @@ def get_source_html_path(source_path):
 
 
 def get_page_html_info(page):
-    return {'title': page['title'],
+    return {'title': screening_string_data(page['title']),
             'source': get_source_html_path(page['source'])}
 
 
@@ -65,7 +73,7 @@ def create_index_html_file(site_directory, pages_list, topics_list):
 
 def get_page_content(page_source_path):
     with open(page_source_path, "r") as markdown_file:
-        return markdown.markdown(markdown_file.read())
+        return markdown.markdown(screening_string_data(markdown_file.read()))
 
 
 def get_page_html(page_source_path):

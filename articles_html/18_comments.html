@@ -35,12 +35,12 @@ price = Column(BigInteger)  # рубли * 100
 Заключается в тройные двойные кавычки. Вот так:</p>
 <pre><code>:::python
 def tensorsolve(a, b, axes=None):
-    """
+    &amp;quot;&amp;quot;&amp;quot;
     Solve the tensor equation ``a x = b`` for x.
     It is assumed that all indices of `x` are summed over in the product,
     together with the rightmost indices of `a`, as is done in, for example,
     ``tensordot(a, x, axes=len(b.shape))``.
-    """
+    &amp;quot;&amp;quot;&amp;quot;
 </code></pre>
 <p>В серьёзных проектах из них часто генерируется документация, поэтому они могут быть большими, по несколько экранов.
 Это касается проектов, у которых есть документация для разработчиков: Django, numpy, sqlalchemy.</p>
@@ -55,12 +55,12 @@ def tensorsolve(a, b, axes=None):
 с Питона на русский/английский. Пример:</p>
 <pre><code>:::python
 # загружаем данные из файла data.json
-with open('users.json', 'r') as handler:
+with open(&amp;#39;users.json&amp;#39;, &amp;#39;r&amp;#39;) as handler:
     data = json.load(handler)
 </code></pre>
 <p>Вот как можно исправить:</p>
 <pre><code>:::python
-with open('users.json', 'r') as handler:
+with open(&amp;#39;users.json&amp;#39;, &amp;#39;r&amp;#39;) as handler:
     data = json.load(handler)
 </code></pre>
 <p>А так – ещё лучше:</p>

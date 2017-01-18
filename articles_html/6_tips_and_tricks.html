@@ -27,8 +27,8 @@
 <h3>Итерируй сразу по коллекции, а не по индексам</h3>
 <p>Раньше в C++ итерация по коллекции проходила так:</p>
 <pre><code>:::cpp
-for(int i = 0; i &lt; books_amount; i++) {
-    cout &lt;&lt; books[i];
+for(int i = 0; i &amp;lt; books_amount; i++) {
+    cout &amp;lt;&amp;lt; books[i];
 }
 </code></pre>
 <p>Этот же способ используется в других языках. Поэтому на Питоне хочется написать так же:</p>
@@ -57,16 +57,16 @@ for book_number, book in enumerate(books):
 <h3>Используй None</h3>
 <p>Часто нужно предусмотреть какой-нибудь хреновый случай – нет файла с данными, не работает интернет,
 не хватает места на диске, пользователь ввёл неверные данные. </p>
-<p>В этом случае переменную с данными нужно чем-то заполнить, но со смыслом, типа, "тут ничего нет".</p>
-<p>Для "ничего" в Питоне есть <code>None</code>. Не пустая строка и не -1, а именно <code>None</code>:</p>
+<p>В этом случае переменную с данными нужно чем-то заполнить, но со смыслом, типа, &quot;тут ничего нет&quot;.</p>
+<p>Для &quot;ничего&quot; в Питоне есть <code>None</code>. Не пустая строка и не -1, а именно <code>None</code>:</p>
 <pre><code>:::python
 try:
-    latitude = float(input('Введите широту: '))
+    latitude = float(input(&amp;#39;Введите широту: &amp;#39;))
 except ValueError:
     latitude = None
 
 if latitude is None:
-    print('wtf, dude?')
+    print(&amp;#39;wtf, dude?&amp;#39;)
 </code></pre>
 <p>Обрати внимание на то, как проверяется, находится ли в переменной <code>None</code>: <code>if latitude is None</code>.
 Не <code>if latitude == None</code> и не <code>if latitude</code>. Это важно.</p>
@@ -74,14 +74,14 @@ if latitude is None:
 <p>Загрузим json из файла:</p>
 <pre><code>:::python
 def load_json_data(filepath):
-    with open(filepath, 'r') as file_handler:
+    with open(filepath, &amp;#39;r&amp;#39;) as file_handler:
         return json.load(file_handler)
 </code></pre>
 <p>Всё сломается, если передать путь до несуществующего файла. Исправим:</p>
 <pre><code>:::python
 def load_json_data(filepath):
     if os.path.exists(filepath):
-        with open(filepath, 'r') as file_handler:
+        with open(filepath, &amp;#39;r&amp;#39;) as file_handler:
             return json.load(file_handler)
     else:
         return None
@@ -92,7 +92,7 @@ def load_json_data(filepath):
 <pre><code>:::python
 def load_json_data(filepath):
     if os.path.exists(filepath):
-        with open(filepath, 'r') as file_handler:
+        with open(filepath, &amp;#39;r&amp;#39;) as file_handler:
             return json.load(file_handler)
 </code></pre>
 <p>Теперь всё лаконично, но очень связанно, как предложение, в котором, помимо деепричастных оборотов, есть ещё
@@ -103,7 +103,7 @@ def load_json_data(filepath):
 def load_json_data(filepath):
     if not os.path.exists(filepath):
         return None
-    with open(filepath, 'r') as file_handler:
+    with open(filepath, &amp;#39;r&amp;#39;) as file_handler:
         return json.load(file_handler)
 </code></pre>
 <p>Теперь стало проще: меньше вложенности, просто читать. Меньше багов.</p>
@@ -116,7 +116,7 @@ if len(users) == 0:
 </code></pre>
 <p>Или пустая строка:</p>
 <pre><code>:::python
-if user.email == '':
+if user.email == &amp;#39;&amp;#39;:
     pass
 </code></pre>
 <p>Или ноль:</p>
@@ -169,10 +169,10 @@ if not user.level:
 <p>Функции нужны, чтобы сделать код понятным и реиспользуемым.</p>
 <p>Понятным – это когда с первого взгляда понятно, что он делает:</p>
 <pre><code>:::python
-credentials = load_oauth_credentials_from_file('fb_creds.json')
+credentials = load_oauth_credentials_from_file(&amp;#39;fb_creds.json&amp;#39;)
 fb_api = get_facebook_api(credentials)
 messages = fb_api.get_unread_messages()
-send_notifications_to_slack(messages=messages, user='ilebedev')
+send_notifications_to_slack(messages=messages, user=&amp;#39;ilebedev&amp;#39;)
 </code></pre>
 <p>Сперва из файла загружаются ключи доступа к АПИ Фейсбука, потом создаётся объект для взаимодействия
 с АПИ и получаются непрочитанные сообщение. Эти сообщения отправляются в Слак пользователю ilebedev.</p>
@@ -194,7 +194,7 @@ send_notifications_to_slack(messages=messages, user='ilebedev')
 <p>Это значит, что у каждой задачи:</p>
 <ul>
 <li><strong>должна быть документация</strong>. Что это, зачем, как запускать, какие файлы откуда надо скачать, что произойдёт
-и подобные вопросы в ней должны быть освящены. Это кажется ненужным (<em>"кам он, это же учебные задачки"</em>), но это не так.
+и подобные вопросы в ней должны быть освящены. Это кажется ненужным (<em>&quot;кам он, это же учебные задачки&quot;</em>), но это не так.
 Доведение любой поделки до вменяемого состояния – такой же навык, как умение программировать и его необходимо развивать.</li>
 <li><strong>не должно быть захардкоженых путей до файлов</strong>. Их же нет у пользователя! Напиши, где их взять, сделай путь параметром,
 опиши в <code>--help</code>, как им пользоваться.</li>
